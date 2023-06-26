@@ -63,10 +63,17 @@ var ingredientes = [" "];
 var preparacion = " ";
 function crearNuevaReceta() {
     crear.addEventListener("click", (e) => {
-        ingredientes = prompt("Ingrese los ingredientes de la receta nueva");
+        cantidad = prompt("Ingrese la cantidad de ingredientes que lleva la receta");
+        var i = 0;
+        while(i < cantidad){
+            ingredientes = prompt("Ingrese un ingrediente");
+            recetas.push({
+                "ingredientes": ingredientes,
+            });
+            i++;
+        }
         preparacion = prompt("Ingrese la preparación de la receta");
         recetas.push({
-            "ingredientes": ingredientes,
             "preparacion": preparacion,
         })
         console.log(recetas);
