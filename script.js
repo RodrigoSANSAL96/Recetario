@@ -1,9 +1,16 @@
 var recetas = [];
 var ingredientesDisponibles = [];
+var nombreU = "";
+var nombre = "";
+var ingredientes = [];
+var preparacion = "";
+var recetaU = [];
 
 const agregar = document.createElement("button");
 const encontrar = document.createElement("button");
 const crear = document.createElement("button");
+const verIngredientes = document.createElement("button");
+const verRecetas = document.createElement("button");
 
 function menu() {
     
@@ -18,6 +25,14 @@ function menu() {
     crear.type = "button";
     crear.innerText = "Crear nueva receta";
     document.body.appendChild(crear);
+
+    verIngredientes.type = "button";
+    verIngredientes.innerText = "Ver ingredientes disponibles";
+    document.body.appendChild(verIngredientes);
+
+    verRecetas.type = "button";
+    verRecetas.innerText = "Ver recetas creadas";
+    document.body.appendChild(verRecetas);
 
     // mostrar menu:
     // boton de agregar ingredientes disponbiles
@@ -37,49 +52,86 @@ function agregarIngredienteDisponible() {
 }
 agregarIngredienteDisponible();
 
-const mostrarRecetaEncontrada = document.createElement("p");
+var mostrarIngredientes = document.createElement("p");
 
-function encontrarReceta() {
+function verIngredientesAgregados(){
+    verIngredientes.addEventListener("click", (e) => {
+        mostrarIngredientes.type = "text";
+        mostrarIngredientes.innerText = "Ingredientes disponibles: " + ingredientesDisponibles;
+        document.body.appendChild(mostrarIngredientes);
+    })
+}
+verIngredientesAgregados();
+
+
+
+/* function encontrarReceta() {
     encontrar.addEventListener("click", (e) => {
-        for(i = 0; i < recetas.length ; i++){
-            for(j = 0; j < ingredientesDisponibles.length; j++){
-                if(ingredientesDisponibles[j] == recetas[i]["ingredientes"]){
-                    var ingredientesRecetaEncontrada = recetas[i]["ingredientes"];
-                    var preparacionRecetaEncontrada = recetas[i]["preparacion"];
-                    mostrarRecetaEncontrada.type = "text";
-                    mostrarRecetaEncontrada.innerText = "Ingredientes de la receta encontrada: " + ingredientesRecetaEncontrada + " " + ". Preparación de la receta encontrada: " + preparacionRecetaEncontrada;
-                    document.body.appendChild(mostrarRecetaEncontrada);
-                };
+        if(ingredientes.length === ingredientesDisponibles.length){
+            for(i = 0; i < ingredientes.length; i++){
+                for(j = 0; j < ingredientesDisponibles.length; j++){
+                    if(ingredientes[i] === ingredientesDisponibles[j]){
+                        console.log(ingredientes[i]);
+                    }else{
+                        console.log("No se tienen los ingredientes necesarios para las recetas disponibles");
+                    }
+                }
             }
         }
     });
 }
-encontrarReceta();
+encontrarReceta(); */
     // busca cual receta se puede hacer en base a los ingredientes disponibles agregados
     // se muestran los ingredientes y la preparación 
 
-    
-var ingredientes = [" "];
-var preparacion = " ";
 function crearNuevaReceta() {
     crear.addEventListener("click", (e) => {
-        cantidad = prompt("Ingrese la cantidad de ingredientes que lleva la receta");
+        nombreU = prompt("Ingrese el nombre de la receta");
         var i = 0;
+        var cantidad = 0;
+        cantidad = prompt("Ingrese la cantidad de ingredientes");
         while(i < cantidad){
-            ingredientes = prompt("Ingrese un ingrediente");
-            recetas.push({
-                "ingredientes": ingredientes,
-            });
-            i++;
+            ingredientesIngresados = prompt("Ingrese un ingrediente");
+            ingredientes.push(ingredientesIngresados);
+            i++
         }
-        preparacion = prompt("Ingrese la preparación de la receta");
-        recetas.push({
+        preparacion = prompt("Ingrese como se prepara");
+        recetaU.push({
+            "nombre": nombreU,
+            "ingredientes": ingredientes,
             "preparacion": preparacion,
         })
+        console.log(recetaU);
+        recetas.push(recetaU);
         console.log(recetas);
     })
     // crea una nueva receta para agregar al recetario
 }
 crearNuevaReceta();
+
+var mostrarRecetaCreada = document.createElement("p");
+
+function verRecetasCreadas(){
+    verRecetas.addEventListener("click", (e) => {
+        var k = 0;
+        var l = 0;
+        var recetaCreadaO = [];
+        while(k < recetas.length){
+            for(l = 0; l < recetas[k].length; l++){
+                var recetaCreada = "";
+                recetaCreada = "Receta creadas: " + "nombre: " + recetas[k][l]["nombre"] + ", ingredientes: " + recetas[k][l]["ingredientes"] + " y preparación:" + recetas[k][l]["preparacion"];
+                mostrarRecetaCreada.type = "text";
+                mostrarRecetaCreada.innerText = recetaCreada;
+                document.body.appendChild(mostrarRecetaCreada);
+                l++;
+            }
+            recetaCreada = "";
+            recetaCreadaO = [];
+            k++
+        }
+        
+    })
+}
+verRecetasCreadas();
 
 // Opcional: agregar cantidad necesaria de cada ingrediente para cada receta y verificar si se tiene suficiente para realizarla
