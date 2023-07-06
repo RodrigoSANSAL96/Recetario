@@ -67,13 +67,10 @@ verIngredientesAgregados();
 function encontrarReceta() {
     encontrar.addEventListener("click", (e) => {
         var recetasEncontradas = [];
-        var l = 0;
-        var k = 0;
-        var j = 0;
-        for(l = 0; l < recetas.length; l++){
+        for(var l = 0; l < recetas.length; l++){
             var contador = 0
-            for(k = 0 ; k < recetas[l].ingredientes.length; k++){ 
-                for(j = 0; j < ingredientesDisponibles.length; j++){
+            for(var k = 0 ; k < recetas[l].ingredientes.length; k++){ 
+                for(var j = 0; j < ingredientesDisponibles.length; j++){
                     if(ingredientesDisponibles[j] === recetas[l].ingredientesRecetas[k]){
                         contador++
                         if(contador === recetas[l].ingredientesRecetas.length){
