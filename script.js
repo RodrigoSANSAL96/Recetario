@@ -2,7 +2,6 @@ var recetas = [];
 var ingredientesDisponibles = [];
 var nombreU = "";
 var nombre = "";
-var ingredientes = [];
 var preparacion = "";
 
 const agregar = document.createElement("button");
@@ -95,6 +94,7 @@ function crearNuevaReceta() {
         var i;
         var cantidad;
         cantidad = prompt("Ingrese la cantidad de ingredientes");
+        var ingredientes = [];
         for (i = 0; i < cantidad; i++) {
             ingredientesIngresados = prompt("Ingrese un ingrediente");
             ingredientes.push(ingredientesIngresados);
